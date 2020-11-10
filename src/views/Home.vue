@@ -1,32 +1,32 @@
 <template>
   <div>
-    <AddTodo v-on:add-todo="addTodo"/>
-    <Todos :todos='todos' v-on:del-todo="deleteTodo" />
+    <AddTodo v-on:add-todo="addTodo" />
+    <Todos :todos="todos" v-on:del-todo="deleteTodo" />
   </div>
 </template>
 
 <script>
 import Todos from "../components/Todos";
-import AddTodo from '../components/AddTodo.vue'
-import axios from 'axios'
+import AddTodo from "../components/AddTodo.vue";
+import axios from "axios";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    Todos, AddTodo
+    Todos,
+    AddTodo,
   },
   data() {
     return {
-      todos: []
-    }
+      todos: [],
+    };
   },
   methods: {
     deleteTodo(id) {
-      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(() => this.todos = this.todos.filter(
-        todo => todo.id !== id
-      ))
-      .catch(err => console.log(err))
+      axios
+        .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        .then(() => (this.todos = this.todos.filter((todo) => todo.id !== id)))
+        .catch((err) => console.log(err));
     },
     addTodo(newTodoTitle) {
       // let newTodo;
@@ -44,20 +44,22 @@ export default {
       //   }
       // }
       // this.todos.push(newTodo);
-      axios.post('https://jsonplaceholder.typicode.com/todos', {
-        title: newTodoTitle,
-        completed: false
-      })
-      .then(response => this.todos.push(response.data))
-      .catch(err => console.log(err))
-    }
+      axios
+        .post("https://jsonplaceholder.typicode.com/todos", {
+          title: newTodoTitle,
+          completed: false,
+        })
+        .then((response) => this.todos.push(response.data))
+        .catch((err) => console.log(err));
+    },
   },
   created() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
-    .then(response => this.todos = response.data)
-    .catch(err => console.log(err))
-  }
-}
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
+      .then((response) => (this.todos = response.data))
+      .catch((err) => console.log(err));
+  },
+};
 </script>
 
 <style>
@@ -79,6 +81,6 @@ body {
   cursor: pointer;
 }
 .btn:hover {
-    background: #666;
+  background: #666;
 }
 </style>
