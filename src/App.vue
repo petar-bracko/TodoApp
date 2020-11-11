@@ -5,11 +5,18 @@
 
 <script>
 import Header from "./components/layout/Header.vue";
+import axios from "axios";
 
 export default {
   name: "app",
   components: {
     Header,
+  },
+  created() {
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
+      .then((response) => (this.$store.state.todos = response.data))
+      .catch((err) => console.log(err));
   },
 };
 </script>

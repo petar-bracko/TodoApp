@@ -1,26 +1,19 @@
 <template>
   <div>
     <AddTodo />
-    <Todos :todos="todos" v-on:del-todo="deleteTodo" />
+    <Todos />
   </div>
 </template>
 
 <script>
 import Todos from "../components/Todos";
 import AddTodo from "../components/AddTodo.vue";
-import axios from "axios";
 
 export default {
   name: "Home",
   components: {
     Todos,
     AddTodo,
-  },
-  created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then((response) => (this.$store.state.todos = response.data))
-      .catch((err) => console.log(err));
   },
 };
 </script>
