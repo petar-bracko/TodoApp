@@ -6,7 +6,7 @@
         @change="markcomplete(todo)"
         :checked="todo.completed === true"
       />
-      <span>{{ todo.title }}</span>
+      <span>{{ todo.title + todo.id }}</span>
       <button class="del" @click="$emit('del-todo', todo.id)">
         X
       </button>

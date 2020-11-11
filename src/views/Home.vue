@@ -16,32 +16,41 @@ export default {
     Todos,
     AddTodo,
   },
-  data() {
-    return {
-      todos: [],
-    };
-  },
   methods: {
     deleteTodo(id) {
       axios
         .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(() => (this.todos = this.todos.filter((todo) => todo.id !== id)))
+        .then(
+          () =>
+            (this.$store.state.todos = this.$store.state.todos.filter(
+              (todo) => todo.id !== id
+            ))
+        )
         .catch((err) => console.log(err));
     },
     addTodo(newTodoTitle) {
+      let newId;
+      if (this.$store.state.todos.length === 0) {
+        newId = 1;
+      } else {
+        newId =
+          this.$store.state.todos[this.$store.state.todos.length - 1].id + 1;
+      }
+      let itemToAdd = {
+        id: newId,
+        title: newTodoTitle,
+        completed: false,
+      };
       axios
-        .post("https://jsonplaceholder.typicode.com/todos", {
-          title: newTodoTitle,
-          completed: false,
-        })
-        .then((response) => this.todos.push(response.data))
+        .post("https://jsonplaceholder.typicode.com/todos", itemToAdd)
+        .then(() => this.$store.state.todos.push(itemToAdd))
         .catch((err) => console.log(err));
     },
   },
   created() {
     axios
       .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then((response) => (this.todos = response.data))
+      .then((response) => (this.$store.state.todos = response.data))
       .catch((err) => console.log(err));
   },
 };
