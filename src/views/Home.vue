@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AddTodo v-on:add-todo="addTodo" />
+    <AddTodo />
     <Todos :todos="todos" v-on:del-todo="deleteTodo" />
   </div>
 </template>
@@ -15,37 +15,6 @@ export default {
   components: {
     Todos,
     AddTodo,
-  },
-  methods: {
-    deleteTodo(id) {
-      axios
-        .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(
-          () =>
-            (this.$store.state.todos = this.$store.state.todos.filter(
-              (todo) => todo.id !== id
-            ))
-        )
-        .catch((err) => console.log(err));
-    },
-    addTodo(newTodoTitle) {
-      let newId;
-      if (this.$store.state.todos.length === 0) {
-        newId = 1;
-      } else {
-        newId =
-          this.$store.state.todos[this.$store.state.todos.length - 1].id + 1;
-      }
-      let itemToAdd = {
-        id: newId,
-        title: newTodoTitle,
-        completed: false,
-      };
-      axios
-        .post("https://jsonplaceholder.typicode.com/todos", itemToAdd)
-        .then(() => this.$store.state.todos.push(itemToAdd))
-        .catch((err) => console.log(err));
-    },
   },
   created() {
     axios

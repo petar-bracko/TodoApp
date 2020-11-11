@@ -6,8 +6,8 @@
         @change="markcomplete(todo)"
         :checked="todo.completed === true"
       />
-      <span>{{ todo.title + todo.id }}</span>
-      <button class="del" @click="$emit('del-todo', todo.id)">
+      <span>{{ todo.title }}</span>
+      <button class="del" @click="deleteTodo">
         X
       </button>
     </p>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "TodoItem",
   props: {
@@ -30,6 +32,17 @@ export default {
       } else {
         todo.completed = true;
       }
+    },
+    deleteTodo() {
+      axios
+        .delete(`https://jsonplaceholder.typicode.com/todos/${this.todo.id}`)
+        .then(
+          () =>
+            (this.$store.state.todos = this.$store.state.todos.filter(
+              (todo) => todo.id !== this.todo.id
+            ))
+        )
+        .catch((err) => console.log(err));
     },
   },
 };

@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "AddTodo",
   data() {
@@ -23,7 +25,22 @@ export default {
   methods: {
     addTodo(e) {
       e.preventDefault();
-      this.$emit("add-todo", this.title);
+      let newId;
+      if (this.$store.state.todos.length === 0) {
+        newId = 1;
+      } else {
+        newId =
+          this.$store.state.todos[this.$store.state.todos.length - 1].id + 1;
+      }
+      let itemToAdd = {
+        id: newId,
+        title: this.title,
+        completed: false,
+      };
+      axios
+        .post("https://jsonplaceholder.typicode.com/todos", itemToAdd)
+        .then(() => this.$store.state.todos.push(itemToAdd))
+        .catch((err) => console.log(err));
       this.title = "";
     },
   },
