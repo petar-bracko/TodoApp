@@ -29,21 +29,6 @@ export default {
         .catch((err) => console.log(err));
     },
     addTodo(newTodoTitle) {
-      // let newTodo;
-      // if(this.todos.length === 0) {
-      //   newTodo = {
-      //     id: 1,
-      //     title: newTodoTitle,
-      //     completed: false
-      //   }
-      // } else {
-      //   newTodo = {
-      //     id: this.todos[this.todos.length-1].id + 1,
-      //     title: newTodoTitle,
-      //     completed: false
-      //   }
-      // }
-      // this.todos.push(newTodo);
       axios
         .post("https://jsonplaceholder.typicode.com/todos", {
           title: newTodoTitle,
