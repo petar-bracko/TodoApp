@@ -5,7 +5,6 @@
 
 <script>
 import Header from "./components/layout/Header.vue";
-import axios from "axios";
 
 export default {
   name: "app",
@@ -13,18 +12,8 @@ export default {
     Header,
   },
   created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then((response) => (this.$store.state.todos = response.data))
-      .catch((err) => console.log(err));
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then(
-        (response) =>
-          (this.$store.state.completedTodos = response.data.filter(
-            (todo) => todo.completed
-          ))
-      );
+    this.$store.commit("initTodos");
+    this.$store.commit("initCompletedTodos");
   },
 };
 </script>

@@ -1,11 +1,8 @@
 <template>
   <div class="about">
     <h1>Completed Todos</h1>
-    <div
-      class="finished-todos"
-      v-if="this.$store.state.completedTodos.length > 0"
-    >
-      <ul v-for="todo in this.$store.state.completedTodos" :key="todo.id">
+    <div class="finished-todos" v-if="CompletedTodos.length > 0">
+      <ul v-for="todo in CompletedTodos" :key="todo.id">
         <li class="todo-item">{{ todo.title }}</li>
       </ul>
     </div>
@@ -18,6 +15,11 @@
 <script>
 export default {
   name: "CompletedTodos",
+  computed: {
+    CompletedTodos() {
+      return this.$store.getters.GetCompletedTodos;
+    },
+  },
 };
 </script>
 

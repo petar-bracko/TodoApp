@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="todo in this.$store.state.todos" :key="todo.id">
-      <TodoItem :todo="todo" v-on:del-todo="$emit('del-todo', todo.id)" />
+    <div v-for="todo in Todos" :key="todo.id">
+      <TodoItem :todo="todo" />
     </div>
   </div>
 </template>
@@ -13,6 +13,11 @@ export default {
   name: "Todos",
   components: {
     TodoItem,
+  },
+  computed: {
+    Todos() {
+      return this.$store.getters.GetTodos;
+    },
   },
 };
 </script>

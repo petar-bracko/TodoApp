@@ -9,16 +9,19 @@
         />
         <span>{{ todo.title }}</span>
       </label>
-      <button class="del" @click="deleteTodo">
-        X
+      <button
+        class="del"
+        @click="finishTodo"
+        :disabled="!todo.completed"
+        :class="{ 'disabled-btn': !todo.completed }"
+      >
+        Finish
       </button>
     </p>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "TodoItem",
   props: {
@@ -28,27 +31,13 @@ export default {
     },
   },
   methods: {
-    markcomplete(todo) {
-      if (todo.completed) {
-        todo.completed = false;
-        this.$store.state.completedTodos = this.$store.state.completedTodos.filter(
-          (todo) => todo.id !== this.todo.id
-        );
-      } else {
-        todo.completed = true;
-        this.$store.state.completedTodos.push(this.todo);
-      }
+    markcomplete() {
+      if (this.todo.completed)
+        this.$store.commit("cancelCompletedTodo", this.todo);
+      else this.$store.commit("addCompletedTodo", this.todo);
     },
-    deleteTodo() {
-      axios
-        .delete(`https://jsonplaceholder.typicode.com/todos/${this.todo.id}`)
-        .then(
-          () =>
-            (this.$store.state.todos = this.$store.state.todos.filter(
-              (todo) => todo.id !== this.todo.id
-            ))
-        )
-        .catch((err) => console.log(err));
+    finishTodo() {
+      this.$store.commit("finishTodo", this.todo);
     },
   },
 };
@@ -82,5 +71,9 @@ input[type="checkbox"] {
   content: "";
   clear: both;
   display: table;
+}
+.disabled-btn {
+  opacity: 0.2;
+  cursor: not-allowed;
 }
 </style>
