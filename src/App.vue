@@ -14,6 +14,7 @@ export default {
   created() {
     this.$store.commit("initTodos");
     this.$store.commit("initCompletedTodos");
+    this.$store.commit("initActiveAtodos");
   },
 };
 </script>

@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     Todos() {
-      return this.$store.getters.GetTodos;
+      return this.$store.getters.GetActiveTodos;
     },
   },
 };

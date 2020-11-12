@@ -5,7 +5,9 @@ export default createStore({
   state() {
     return {
       todos: [],
+      activeTodos: [],
       completedTodos: [],
+      deletedTodos: [],
     };
   },
   getters: {
@@ -14,6 +16,12 @@ export default createStore({
     },
     GetCompletedTodos(state) {
       return state.completedTodos;
+    },
+    GetDeletedTodos(state) {
+      return state.deletedTodos;
+    },
+    GetActiveTodos(state) {
+      return state.activeTodos;
     },
   },
   mutations: {
@@ -34,14 +42,22 @@ export default createStore({
         )
         .catch((err) => console.log(err));
     },
-    addCompletedTodo(state, todo) {
-      todo.completed = true;
-      state.completedTodos.push(todo);
+    initActiveAtodos(state) {
+      axios
+        .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
+        .then(
+          (response) =>
+            (state.activeTodos = response.data.filter(
+              (todo) => !todo.completed
+            ))
+        )
+        .catch((err) => console.log(err));
     },
-    cancelCompletedTodo(state, canceled) {
-      canceled.completed = false;
-      state.completedTodos = state.completedTodos.filter(
-        (todo) => todo.id !== canceled.id
+    finishTodo(state, finishedTodo) {
+      finishedTodo.completed = true;
+      state.completedTodos.push(finishedTodo);
+      state.activeTodos = state.activeTodos.filter(
+        (todo) => todo.id !== finishedTodo.id
       );
     },
     addNewTodo(state, newTodoTitle) {
@@ -60,17 +76,23 @@ export default createStore({
         .post("https://jsonplaceholder.typicode.com/todos", itemToAdd)
         .then(() => state.todos.push(itemToAdd))
         .catch((err) => console.log(err));
+      state.activeTodos.push(itemToAdd);
     },
-    finishTodo(state, todoToFinish) {
+    deleteTodo(state, tododToDelete) {
       axios
-        .delete(`https://jsonplaceholder.typicode.com/todos/${todoToFinish.id}`)
-        .then(
-          () =>
-            (state.todos = state.todos.filter(
-              (todo) => todo.id !== todoToFinish.id
-            ))
-        )
+        .delete(`https://jsonplaceholder.typicode.com/todos/${tododToDelete}`)
+        .then(() => state.deletedTodos.push(tododToDelete))
         .catch((err) => console.log(err));
+      state.completedTodos = state.completedTodos.filter(
+        (todo) => todo.id !== tododToDelete.id
+      );
+    },
+    activateTodo(state, todoToActivate) {
+      todoToActivate.completed = false;
+      state.activeTodos.push(todoToActivate);
+      state.completedTodos = state.completedTodos.filter(
+        (todo) => todo.id !== todoToActivate.id
+      );
     },
   },
 });
