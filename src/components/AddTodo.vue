@@ -25,23 +25,27 @@ export default {
   methods: {
     addTodo(e) {
       e.preventDefault();
-      let newId;
-      if (this.$store.state.todos.length === 0) {
-        newId = 1;
+      if (this.title.length > 0) {
+        let newId;
+        if (this.$store.state.todos.length === 0) {
+          newId = 1;
+        } else {
+          newId =
+            this.$store.state.todos[this.$store.state.todos.length - 1].id + 1;
+        }
+        let itemToAdd = {
+          id: newId,
+          title: this.title,
+          completed: false,
+        };
+        axios
+          .post("https://jsonplaceholder.typicode.com/todos", itemToAdd)
+          .then(() => this.$store.state.todos.push(itemToAdd))
+          .catch((err) => console.log(err));
+        this.title = "";
       } else {
-        newId =
-          this.$store.state.todos[this.$store.state.todos.length - 1].id + 1;
+        alert("Please input a title for your Todo");
       }
-      let itemToAdd = {
-        id: newId,
-        title: this.title,
-        completed: false,
-      };
-      axios
-        .post("https://jsonplaceholder.typicode.com/todos", itemToAdd)
-        .then(() => this.$store.state.todos.push(itemToAdd))
-        .catch((err) => console.log(err));
-      this.title = "";
     },
   },
 };
