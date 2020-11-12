@@ -7,7 +7,7 @@
         v-model="title"
         placeholder="Add Todo..."
       />
-      <input type="submit" value="Submit" class="btn" />
+      <input type="submit" value="Add new Todo" class="btn" />
     </form>
   </div>
 </template>

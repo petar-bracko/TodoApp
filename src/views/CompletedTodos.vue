@@ -1,10 +1,10 @@
 <template>
-  <div class="about">
+  <div>
     <h1>Completed Todos</h1>
     <div class="finished-todos" v-if="CompletedTodos.length > 0">
-      <ul v-for="todo in CompletedTodos" :key="todo.id">
-        <li class="todo-item">{{ todo.title }}</li>
-      </ul>
+      <div v-for="todo in CompletedTodos" :key="todo.id">
+        <CompletedTodoItem :todo="todo" />
+      </div>
     </div>
     <div v-else class="finished-todos">
       <p>There are no finished Todos.</p>
@@ -13,8 +13,13 @@
 </template>
 
 <script>
+import CompletedTodoItem from "../components/CompletedTodoItem.vue";
+
 export default {
   name: "CompletedTodos",
+  components: {
+    CompletedTodoItem,
+  },
   computed: {
     CompletedTodos() {
       return this.$store.getters.GetCompletedTodos;
@@ -24,18 +29,7 @@ export default {
 </script>
 
 <style scoped>
-.todo-item {
-  background: #f4f4f4;
-  padding: 10px;
-  border-bottom: 1px #ccc dotted;
-}
 .finished-todos {
   margin-top: 15px;
-}
-.finished-todos > ul {
-  list-style-type: none;
-}
-.finished-todos > ul > li {
-  padding: 15px 0;
 }
 </style>

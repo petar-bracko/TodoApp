@@ -4,7 +4,7 @@
       <label>
         <input
           type="checkbox"
-          @change="markcomplete(todo)"
+          @change="markcomplete"
           :checked="todo.completed === true"
         />
         <span>{{ todo.title }}</span>
