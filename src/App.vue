@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <router-view />
+  <router-view class="animate__animated animate__fadeIn" />
 </template>
 
 <script>
