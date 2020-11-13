@@ -35,9 +35,13 @@
               <DeletedTodoItem :todo="todo" />
             </div>
           </transition-group>
-          <div v-show="DeletedTodos.length == 0" class="pt15">
-            <p>There are no deleted Todos.</p>
-          </div>
+          <transition
+            leave-active-class="animate__animated animate__fadeOutRight anim-duartion3"
+          >
+            <div v-show="DeletedTodos.length == 0" class="pt15">
+              <p>There are no deleted Todos.</p>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
