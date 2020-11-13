@@ -5,7 +5,13 @@
     <div class="flex-group">
       <div class="flex-50-cont">
         <h2>Finished Todos</h2>
-        <div class="pt15" v-if="CompletedTodos.length > 0">
+        <div class="pt15">
+          <div
+            v-show="CompletedTodos.length == 0"
+            class="pt15 animate__animated animate__fadeIn anim-duration3"
+          >
+            <p>There are no finished Todos.</p>
+          </div>
           <transition-group
             leave-active-class="animate__animated animate__fadeOutLeft anim-duartion3"
           >
@@ -18,16 +24,10 @@
             </div>
           </transition-group>
         </div>
-        <div
-          v-else
-          class="pt15 animate__animated animate__fadeIn anim-duration3"
-        >
-          <p>There are no finished Todos.</p>
-        </div>
       </div>
       <div class="flex-50-cont">
         <h2>Deleted Todos</h2>
-        <div class="hide-overflow pt15" v-if="DeletedTodos.length > 0">
+        <div class="hide-overflow pt15">
           <transition-group
             enter-active-class="animate__animated animate__fadeInRight anim-duartion3"
           >
@@ -35,9 +35,9 @@
               <DeletedTodoItem :todo="todo" />
             </div>
           </transition-group>
-        </div>
-        <div v-else class="pt15">
-          <p>There are no deleted Todos.</p>
+          <div v-show="DeletedTodos.length == 0" class="pt15">
+            <p>There are no deleted Todos.</p>
+          </div>
         </div>
       </div>
     </div>
