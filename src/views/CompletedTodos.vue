@@ -5,23 +5,35 @@
     <div class="flex-group">
       <div class="flex-50-cont">
         <h2>Finished Todos</h2>
-        <div class="finished-todos" v-if="CompletedTodos.length > 0">
-          <div class="todo-item" v-for="todo in CompletedTodos" :key="todo.id">
-            <CompletedTodoItem :todo="todo" />
-          </div>
+        <div class="pt15" v-if="CompletedTodos.length > 0">
+          <transition-group
+            leave-active-class="animate__animated animate__fadeOutLeft anim-duartion3"
+          >
+            <div
+              class="todo-item"
+              v-for="todo in CompletedTodos"
+              :key="todo.id"
+            >
+              <CompletedTodoItem :todo="todo" />
+            </div>
+          </transition-group>
         </div>
-        <div v-else class="finished-todos">
+        <div v-else class="pt15">
           <p>There are no finished Todos.</p>
         </div>
       </div>
       <div class="flex-50-cont">
         <h2>Deleted Todos</h2>
-        <div class="finished-todos" v-if="DeletedTodos.length > 0">
-          <div class="todo-item" v-for="todo in DeletedTodos" :key="todo.id">
-            <DeletedTodoItem :todo="todo" />
-          </div>
+        <div class="hide-overflow pt15" v-if="DeletedTodos.length > 0">
+          <transition-group
+            enter-active-class="animate__animated animate__fadeInRight anim-duartion3"
+          >
+            <div class="todo-item" v-for="todo in DeletedTodos" :key="todo.id">
+              <DeletedTodoItem :todo="todo" />
+            </div>
+          </transition-group>
         </div>
-        <div v-else class="finished-todos">
+        <div v-else class="pt15">
           <p>There are no deleted Todos.</p>
         </div>
       </div>
@@ -51,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-.finished-todos {
+.pt15 {
   padding-top: 15px;
 }
 .flex-group {
@@ -69,5 +81,8 @@ export default {
   padding: 10px;
   border-bottom: 1px #ccc dotted;
   border-radius: 50px;
+}
+.anim-duartion3 {
+  animation-duration: 0.5s;
 }
 </style>

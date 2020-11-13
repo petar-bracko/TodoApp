@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div v-if="Todos.length > 0">
-      <div v-for="todo in Todos" :key="todo.id">
-        <TodoItem :todo="todo" />
-      </div>
+    <div class="hide-overflow" v-if="Todos.length > 0">
+      <transition-group
+        leave-active-class="animate__animated animate__fadeOutRight check-todo-duration"
+      >
+        <div v-for="todo in Todos" :key="todo.id">
+          <TodoItem :todo="todo" />
+        </div>
+      </transition-group>
     </div>
     <div v-else>
       <div class="empty-active-todos-list">
@@ -34,5 +38,8 @@ export default {
 <style scoped>
 .empty-active-todos-list {
   margin-top: 5px;
+}
+.check-todo-duration {
+  animation-duration: 0.3s;
 }
 </style>

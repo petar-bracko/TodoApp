@@ -27,13 +27,13 @@ export default createStore({
   mutations: {
     initTodos(state) {
       axios
-        .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
+        .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
         .then((response) => (state.todos = response.data))
         .catch((err) => console.log(err));
     },
     initCompletedTodos(state) {
       axios
-        .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
+        .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
         .then(
           (response) =>
             (state.completedTodos = response.data.filter(
@@ -44,7 +44,7 @@ export default createStore({
     },
     initActiveAtodos(state) {
       axios
-        .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
+        .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
         .then(
           (response) =>
             (state.activeTodos = response.data.filter(
