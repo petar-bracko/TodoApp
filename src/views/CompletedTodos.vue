@@ -18,7 +18,10 @@
             </div>
           </transition-group>
         </div>
-        <div v-else class="pt15">
+        <div
+          v-else
+          class="pt15 animate__animated animate__fadeIn anim-duration3"
+        >
           <p>There are no finished Todos.</p>
         </div>
       </div>
