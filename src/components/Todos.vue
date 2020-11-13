@@ -1,7 +1,16 @@
 <template>
   <div>
-    <div v-for="todo in Todos" :key="todo.id">
-      <TodoItem :todo="todo" />
+    <div v-if="Todos.length > 0">
+      <div v-for="todo in Todos" :key="todo.id">
+        <TodoItem :todo="todo" />
+      </div>
+    </div>
+    <div v-else>
+      <div class="empty-active-todos-list">
+        <p>
+          Thera are no active Todos. You can add new ones, or activate old ones.
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -22,4 +31,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.empty-active-todos-list {
+  margin-top: 5px;
+}
+</style>

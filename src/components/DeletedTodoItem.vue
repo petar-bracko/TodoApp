@@ -23,5 +23,7 @@ export default {
   background: #f4f4f4;
   padding: 10px;
   border-bottom: 1px #ccc dotted;
+  border-radius: 50px;
+  margin: 2px 0;
 }
 </style>

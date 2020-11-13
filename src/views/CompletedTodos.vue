@@ -61,7 +61,6 @@ export default {
 }
 .flex-50-cont {
   width: 50%;
-  border: 1px solid red;
   margin: 0 15px;
 }
 </style>
