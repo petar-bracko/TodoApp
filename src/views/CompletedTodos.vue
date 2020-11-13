@@ -6,7 +6,7 @@
       <div class="flex-50-cont">
         <h2>Finished Todos</h2>
         <div class="finished-todos" v-if="CompletedTodos.length > 0">
-          <div v-for="todo in CompletedTodos" :key="todo.id">
+          <div class="todo-item" v-for="todo in CompletedTodos" :key="todo.id">
             <CompletedTodoItem :todo="todo" />
           </div>
         </div>
@@ -17,7 +17,7 @@
       <div class="flex-50-cont">
         <h2>Deleted Todos</h2>
         <div class="finished-todos" v-if="DeletedTodos.length > 0">
-          <div v-for="todo in DeletedTodos" :key="todo.id">
+          <div class="todo-item" v-for="todo in DeletedTodos" :key="todo.id">
             <DeletedTodoItem :todo="todo" />
           </div>
         </div>
@@ -62,5 +62,12 @@ export default {
 .flex-50-cont {
   width: 50%;
   margin: 0 15px;
+}
+.todo-item {
+  margin: 2px 0;
+  background: #f4f4f4;
+  padding: 10px;
+  border-bottom: 1px #ccc dotted;
+  border-radius: 50px;
 }
 </style>
