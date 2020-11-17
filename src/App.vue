@@ -1,6 +1,8 @@
 <template>
-  <Header />
-  <router-view class="animate__animated animate__fadeIn" />
+  <div>
+    <Header />
+    <router-view class="animate__animated animate__fadeIn" />
+  </div>
 </template>
 
 <script>
