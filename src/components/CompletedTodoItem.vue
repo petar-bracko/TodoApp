@@ -23,10 +23,10 @@ export default {
   },
   methods: {
     deleteTodo() {
-      this.$store.commit("deleteTodo", this.todo);
+      this.$store.dispatch("DELETE_TODO", this.todo);
     },
     activateTodo() {
-      this.$store.commit("activateTodo", this.todo);
+      this.$store.dispatch("ACTIVATE_TODO", this.todo);
     },
   },
 };

@@ -24,7 +24,7 @@ export default {
     addTodo(e) {
       e.preventDefault();
       if (this.title.length > 0) {
-        this.$store.commit("addNewTodo", this.title);
+        this.$store.dispatch("ADD_NEW_TODO", this.title);
         this.title = "";
       } else {
         alert("Please input a title for your Todo");

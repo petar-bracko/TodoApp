@@ -24,10 +24,7 @@ export default {
   },
   methods: {
     markcomplete() {
-      // if (this.todo.completed)
-      //   this.$store.commit("cancelCompletedTodo", this.todo);
-      // else this.$store.commit("finishTodo", this.todo);
-      this.$store.commit("finishTodo", this.todo);
+      this.$store.dispatch("FINISH_TODO", this.todo);
     },
   },
 };

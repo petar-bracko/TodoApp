@@ -12,9 +12,9 @@ export default {
     Header,
   },
   created() {
-    this.$store.commit("initTodos");
-    this.$store.commit("initCompletedTodos");
-    this.$store.commit("initActiveAtodos");
+    this.$store.dispatch("INIT_TODOS");
+    this.$store.dispatch("INIT_COMPLETED_TODOS");
+    this.$store.dispatch("INIT_ACTIVE_TODOS");
   },
 };
 </script>

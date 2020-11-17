@@ -24,6 +24,29 @@ export default createStore({
       return state.activeTodos;
     },
   },
+  actions: {
+    INIT_TODOS({ commit }) {
+      commit("initTodos");
+    },
+    INIT_COMPLETED_TODOS({ commit }) {
+      commit("initCompletedTodos");
+    },
+    INIT_ACTIVE_TODOS({ commit }) {
+      commit("initActiveAtodos");
+    },
+    FINISH_TODO({ commit }, payload) {
+      commit("finishTodo", payload);
+    },
+    ADD_NEW_TODO({ commit }, payload) {
+      commit("addNewTodo", payload);
+    },
+    DELETE_TODO({ commit }, payload) {
+      commit("deleteTodo", payload);
+    },
+    ACTIVATE_TODO({ commit }, payload) {
+      commit("activateTodo", payload);
+    },
+  },
   mutations: {
     initTodos(state) {
       axios
